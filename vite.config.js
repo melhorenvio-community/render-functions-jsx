@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from "url";
+import { resolve } from "path";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -15,6 +16,15 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "tailwind.config.js": resolve("tailwind.config.js"),
+    },
+  },
+  optimizeDeps: {
+    include: ["tailwind.config.js"],
+  },
+  build: {
+    commonjsOptions: {
+      include: ["tailwind.config.js", "node_modules/**"],
     },
   },
   css: ["@melhorenvio/ds-core/style.css", "@/assets/css/index.pcss"],
@@ -25,49 +35,17 @@ function vitePlugins() {
   return [
     SvgLoader(),
     Icons({
-      scale: 1,
       compiler: "vue3",
       customCollections: {
-        "me-icons-action": FileSystemIconLoader(
-          "./node_modules/@melhorenvio/ds-icons/action"
-        ),
-        "me-icons-content": FileSystemIconLoader(
-          "./node_modules/@melhorenvio/ds-icons/content"
-        ),
-        "me-icons-datetime": FileSystemIconLoader(
-          "./node_modules/@melhorenvio/ds-icons/datetime"
-        ),
-        "me-icons-navigation": FileSystemIconLoader(
-          "./node_modules/@melhorenvio/ds-icons/navigation"
-        ),
-        "mr-icons-basic": FileSystemIconLoader("./assets/icons/basic"),
-        "mr-icons-fancy": FileSystemIconLoader("./assets/icons/fancy"),
-      },
-      iconCustomizer(collection, icon, props) {
-        props.width = "1em";
-        props.height = "1em";
+        "mp-icons": FileSystemIconLoader("./src/assets/icons"),
+        "sc-icons": FileSystemIconLoader("./src/assets/shipping-companies"),
       },
     }),
     Components({
       resolvers: [
         Resolver({
           prefix: false,
-          customCollections: [
-            "me-icons-action",
-            "me-icons-content",
-            "me-icons-datetime",
-            "me-icons-navigation",
-            "mr-icons-basic",
-            "mr-icons-fancy",
-          ],
-          enabledCollections: [
-            "me-icons-action",
-            "me-icons-content",
-            "me-icons-datetime",
-            "me-icons-navigation",
-            "mr-icons-basic",
-            "mr-icons-fancy",
-          ],
+          customCollections: ["mp-icons", "sc-icons"],
         }),
       ],
     }),
