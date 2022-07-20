@@ -68,12 +68,10 @@ export default {
               ? productsAll.value?.map((productId) =>
                   h("div", { class: "show" }, [
                     h("h3", { class: "text" }, productId.title),
-                   // h("p", { class: "text" }, [productId.description]),
+                   //h("p", { class: "text" }, [productId.description]),
                     h("img", {
                       src: productId.image,
-                      style: {
-                        boxShadow: "0 0 0.2em #ce62b4",
-                      },
+                      class: "img"
                     }),
                   ])
                 )
@@ -86,18 +84,12 @@ export default {
 </script>
 
 <style scoped>
-.forms {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0px;
-  justify-content: center;
-}
-
 img {
   max-width: 100%;
   height: 156px;
   margin: 0 auto;
+   
+  
 }
 .shows {
   display: grid;
@@ -109,7 +101,8 @@ img {
 }
 .show {
   display: flex;
-  flex-direction: column;
+  flex-direction :row-reverse;
+  margin-top: 60px;
 }
 
 .title {
@@ -127,7 +120,7 @@ img {
   font-family: sans-serif;
   font-weight: 100;
   font-size: medium;
-  font-size: 14px;
+  
 }
 </style>
 
