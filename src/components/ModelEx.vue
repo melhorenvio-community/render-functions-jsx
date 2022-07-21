@@ -1,5 +1,6 @@
-<script>
+<script lang="jsx">
 import { h, ref } from "vue";
+import { MEButton, METextField } from "@melhorenvio/ds-core";
 
 export default {
   setup(props) {
@@ -15,14 +16,17 @@ export default {
             onsubmit: (Event) => Event.preventDefault(),
           },
           [
-            h("input", {
-              style: {
-                border: "0.5px solid #ce62b4",
-                borderRadius: "4px",
-                padding: "12px",
-                width: "300px",
-                boxShadow: "0 0 1em #ce62b4",
-              },
+            h(
+            < METextField
+              label="Type the show name..."
+              name="name"
+              rules="required"
+              autofocus
+              standalone
+             
+            />, 
+            {
+              
               placeholder: "V-model test...",
               onInput: (Event) => {
                 inputValue.value = Event.target.value;

@@ -29,6 +29,7 @@ export default defineConfig({
   },
   css: ["@melhorenvio/ds-core/style.css", "@/assets/css/index.pcss"],
   postcss: require("@melhorenvio/ds-core/postcss.config"),
+  esbuild: { loader: { '.js': '.jsx' } }
 });
 
 function vitePlugins() {
