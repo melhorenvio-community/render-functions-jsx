@@ -6,7 +6,7 @@ export default {
   setup(props) {
     let inputValue = ref(null);
     return () =>
-      h("div", {}, [
+      h("div", {class:"divContainer"}, [
         h("h3", { class: "title" }, "v-model example"),
 
         h(
@@ -50,7 +50,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .forms {
   display: flex;
   flex-wrap: wrap;
@@ -58,24 +58,15 @@ export default {
   padding: 0px;
   justify-content: center;
 }
-
-.title {
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: 400;
-  font-size: large;
-  margin-top: 30px;
-  font-size: 35px;
-  font-family: "Poppins" sans-serif;
-  color: #ce62b4;
+.divContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 5vh 20vh 10px 20vh;
 }
 
-.text {
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: 400;
-  font-size: large;
-  margin-top: 30px;
-  font-size: 20px;
-}
+
 </style>

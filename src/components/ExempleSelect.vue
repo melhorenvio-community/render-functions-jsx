@@ -38,7 +38,101 @@ export default {
     });
 
     return () =>
-      h("div", [
+      h("section", { class: "divContainer" }, [
+        h("h1", { class: "title" }, ["Products"]),
+        h(
+          "form",
+          {
+            class: "divContainer",
+            onsubmit: (Event) => Event.preventDefault(),
+          },
+          [
+            h(
+              "select",
+              {
+                onInput: (Event) => {
+                  selectValue.value = Event.target.value;
+                },
+                onClick: async () => {
+                  productsList(selectValue.value);
+                },
+                style: {
+                  display: "block",
+                  width: "100%",
+                  borderRadius: "0.25rem",
+                  border: "solid 1px #0350a0",
+                  backgroundColor: "#ffff",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
+                  paddingTop: "16px",
+                  paddingBottom: "8px",
+                  fontSize: ".875rem",
+                  lineHeight: "1rem",
+                  fontFamily: "Lato, sans-serif",
+                  fontWeight: "400",
+                },
+              },
+              [
+                categories.value?.map((showItem) =>
+                  h(
+                    "option",
+                    {
+                      style: {
+                        fontFamily: "Lato, sans-serif",
+                        color: "#0350a0",
+                        fontWeight: "400",
+                      },
+                    },
+                    [showItem]
+                  )
+                ),
+              ]
+            ),
+          ]
+        ),
+        h("div", { class: "flexClass" }, [
+          h("section", { class: "showProducts" }, [
+            selectValue.value
+              ? productsAll.value?.map((productId) =>
+                  h(
+                    "div",
+                    {
+                      class: "shadow",
+                      style: {
+                        padding: "10px",
+                      },
+                    },
+                    [
+                      h("h2", { class: "text" }, [productId.title]),
+                      h("img", {
+                        src: productId.image,
+
+                        style: {
+                          maxWidth: "100%",
+                          height: "156px",
+                          margin: "0 auto",
+                        },
+                      }),
+                    ]
+                  )
+                )
+              : h("img", {
+                  src: "src/assets/searchProducts.svg",
+                  style: {
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    marginLeft: "400px",
+                    padding: "10px",
+                  },
+                }),
+          ]),
+        ]),
+      ]);
+  },
+};
+
+/* h("div", [
         h("h3", { class: "title" }, "Available products"),
         h("div", { class: "forms" }, [
           h(
@@ -79,58 +173,32 @@ export default {
                 )
               : ["search products by category..."],
           ]),
-        ]),
-      ]);
-  },
-};
+        ]),*/
 </script>
 
 <style scoped>
-.forms {
+.divContainer {
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0px;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 5vh 20vh 10px 20vh;
+}
+.flexClass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  padding: 5px;
 }
 
-img {
-  max-width: 100%;
-  height: 156px;
-  margin: 0 auto;
-}
-.shows {
+.showProducts {
+  margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(2, 0.4fr);
-  max-width: 100%;
-  overflow-x: hidden;
-  margin: 0 auto;
+  grid-template-columns: 2fr 2fr;
+  width: 100%;
   grid-gap: 10px;
 }
-.show {
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: 400;
-  font-size: large;
-  margin-top: 30px;
-  font-size: 35px;
-  color: #ce62b4;
-}
-
-.text {
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: 100;
-  font-size: medium;
-  font-size: 14px;
-}
 </style>
-
-
-
-

@@ -10,7 +10,6 @@ export default {
 
     const textSearch = async (search) => {
       shows.value = [];
-
       const advancedSearch = await fetch(
         `https://api.tvmaze.com/search/shows?q=${search}`
       ).catch((e) => {
@@ -19,87 +18,102 @@ export default {
         return;
       });
       shows.value = await advancedSearch.json().catch((e) => (error.value = e));
-      console.log(shows.value);
     };
-
     //const ss = slots.default ? slots.default() : [];
     const ss = (show) => (slots.sc ? slots.sc(show) : []);
 
     return () =>
-    
-      h("div", {class: "divMain"}, [
-        h("h3", { class: "title" }, "Virtual Lessor"),
-        ss({ shows: shows.value }),
+      h("section", [
+        h("h1", { class: "title" }, ["Movie Search"]),
+        ss({
+          shows: shows.value,
+        }),
         h(
           "form",
-          {
-            class: "forms",
-            onsubmit: (Event) => Event.preventDefault(),
-          },
+          { class: "container", onsubmit: (Event) => Event.preventDefault() },
           [
             h(
-            <METextField
-              label="Type the show name..."
-              name="name"
-              rules="required"
-              autofocus
-              standalone
-              class="inputStyle"
-            />,
-            {
-              onInput: (Event) => {
-                inputValue.value = Event.target.value;
-                console.log(inputValue.value)
+              <METextField
+                label="Type the show name..."
+                name="name"
+                rules="required"
+                autofocus
+                standalone
+              />,
+              {
+                onInput: (Event) => {
+                  inputValue.value = Event.target.value;
+                  console.log(inputValue.value);
+                },
+              }
+            ),
+            h(<MEButton alt compact label="search"></MEButton>, {
+              style: {
+                marginLeft: "1vh",
+                marginTop: "0.5vh",
+              },
+              onClick: async () => {
+                textSearch(inputValue.value);
+                r;
               },
             }),
-            
-            h(
-               <MEButton
-                 alt
-                 compact
-                 label="search"
-               />,
-              {
-                onClick: async () => {
-                  textSearch(inputValue.value);
-                },
-              },
-              ["Search"]
-            ),
-            h("div", { class: "shows" }, [
-              error.value
-                ? h("div", error.value)
-                : shows.value?.map((showItem) =>
-                    h("div", { class: "show" }, [
-                      h("h3", { class: "text" }, showItem.show.name),
-                      h("img", {
-                        src: showItem.show.image?.medium,
-                        style: {
-                          boxShadow: "0 0 0.2em #ce62b4",
-                        },
-                      }),
-                    ])
-                  ),
-            ]),
           ]
         ),
+        h("div", { class: "shows" }, [
+          shows.value
+            ? shows.value?.map((showItem) =>
+                h("div", { class: "show" }, [
+                  h("h3", { class: "text" }, showItem.show.name),
+                  h("img", {
+                    src: showItem.show.image?.medium,
+                    style: {
+                      boxShadow: "0 0 0.2em #0350a0",
+                      margin: "0 auto",
+                    },
+                  }),
+                ])
+              )
+            : h("div", [
+                h("img", {
+                  src: "src/assets/searchMovie.svg",
+                   style: {
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    maxHeight: "70%",
+                    padding: "10px",
+                  },
+                }),
+              ]),
+        ]),
       ]);
   },
+
+  /*h("div", { class: "shows" }, [
+          error.value
+            ? h("div", error.value)
+            : shows.value?.map((showItem) =>
+                h("div", { class: "show" }, [
+                  h("h3", { class: "text" }, showItem.show.name),
+                  h("img", {
+                    src: showItem.show.image?.medium,
+                    style: {
+                      boxShadow: "0 0 0.2em #0350a0",
+                      margin: "0 auto",
+                    },
+                  }),
+                ])
+              ),
+        ]), */
 };
 </script>
-<style>
-
-.divMain{
+<style scoped>
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.inputStyle {
-  width: 50% !important;
+  margin: 0 auto;
+  padding: 50px;
 }
 .show {
-  margin: 10px;
+  margin: 6px;
   min-width: 210px;
 }
 .shows {
@@ -107,43 +121,64 @@ export default {
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
+  padding: 20px;
 }
-
-.forms {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0px;
-  justify-content: center;
-}
-
-.title {
- 
-  font-family: sans-serif;
-  font-weight: 400;
-  font-size: large;
-  margin-top: 30px;
-  font-size: 35px;
-  color: #ce62b4;
-}
-
-.text {
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: 400;
-  font-size: large;
-  margin-top: 30px;
-  font-size: 20px;
-}
-
-.primary-button {
-  border: 1px solid grey;
-  border-radius: 4px;
-  padding: 12px 20px;
-  margin-left: 24px;
-  color: #fff;
-  background-color: #ce62b4;
-  border-color: #ce62b4;
-  cursor: pointer;
-}
+/*
+return () =>
+      h("div", {}, [
+        h("h3", { class: "title" }, "Virtual Lessor"),
+        h("div", [
+          ss({ shows: shows.value }),
+          h(
+            "form",
+            {
+              onsubmit: (Event) => Event.preventDefault(),
+            },
+            [
+              h(
+                <METextField
+                  label="Type the show name..."
+                  name="name"
+                  rules="required"
+                  autofocus
+                  standalone
+                  class="inputStyle"
+                />,
+                {
+                  onInput: (Event) => {
+                    inputValue.value = Event.target.value;
+                    console.log(inputValue.value);
+                  },
+                }
+              ),
+              h(
+                <MEButton alt compact label="search" />,
+                {
+                  onClick: async () => {
+                    textSearch(inputValue.value);
+                  },
+                },
+                ["Search"]
+              ),
+              h("div", [
+                error.value
+                  ? h("div", error.value)
+                  : shows.value?.map((showItem) =>
+                      h("div", { class: "show" }, [
+                        h("h3", { class: "text" }, showItem.show.name),
+                        h("img", {
+                          src: showItem.show.image?.medium,
+                          style: {
+                            boxShadow: "0 0 0.2em #ce62b4",
+                          },
+                        }),
+                      ])
+                    ),
+              ]),
+            ]
+          ),
+        ]),
+      ]);
+  },
+ */
 </style>
