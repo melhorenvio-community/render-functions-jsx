@@ -20,7 +20,5 @@
   font-size: 18px;
   margin-bottom: 10px;
   margin-top: 5px;
-  
 }
-
 </style>

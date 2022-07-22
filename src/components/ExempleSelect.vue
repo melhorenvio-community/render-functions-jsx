@@ -131,49 +131,6 @@ export default {
       ]);
   },
 };
-
-/* h("div", [
-        h("h3", { class: "title" }, "Available products"),
-        h("div", { class: "forms" }, [
-          h(
-            "select",
-            {
-              style: {
-                border: "0.5px solid #ce62b4",
-                borderRadius: "4px",
-                padding: "12px",
-                width: "300px",
-                boxShadow: "0 0 1em #ce62b4",
-              },
-              onInput: (Event) => {
-                selectValue.value = Event.target.value;
-              },
-              onClick: async () => {
-                productsList(selectValue.value);
-              },
-            },
-            [
-              categories.value?.map((showItem) => h("option", showItem)),
-             
-            ]
-          ),
-          h("div", { class: "shows" }, [
-            selectValue.value
-              ? productsAll.value?.map((productId) =>
-                  h("div", { class: "show" }, [
-                    h("h3", { class: "text" }, productId.title),
-                   // h("p", { class: "text" }, [productId.description]),
-                    h("img", {
-                      src: productId.image,
-                      style: {
-                        boxShadow: "0 0 0.2em #ce62b4",
-                      },
-                    }),
-                  ])
-                )
-              : ["search products by category..."],
-          ]),
-        ]),*/
 </script>
 
 <style scoped>

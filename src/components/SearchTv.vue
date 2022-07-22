@@ -7,7 +7,6 @@ export default {
     let inputValue = ref(null);
     let shows = ref(null);
     let error = ref(null);
-
     const textSearch = async (search) => {
       shows.value = [];
       const advancedSearch = await fetch(
@@ -76,7 +75,7 @@ export default {
             : h("div", [
                 h("img", {
                   src: "src/assets/searchMovie.svg",
-                   style: {
+                  style: {
                     margin: "0 auto",
                     maxWidth: "100%",
                     maxHeight: "70%",
@@ -87,23 +86,6 @@ export default {
         ]),
       ]);
   },
-
-  /*h("div", { class: "shows" }, [
-          error.value
-            ? h("div", error.value)
-            : shows.value?.map((showItem) =>
-                h("div", { class: "show" }, [
-                  h("h3", { class: "text" }, showItem.show.name),
-                  h("img", {
-                    src: showItem.show.image?.medium,
-                    style: {
-                      boxShadow: "0 0 0.2em #0350a0",
-                      margin: "0 auto",
-                    },
-                  }),
-                ])
-              ),
-        ]), */
 };
 </script>
 <style scoped>
@@ -123,62 +105,4 @@ export default {
   justify-content: center;
   padding: 20px;
 }
-/*
-return () =>
-      h("div", {}, [
-        h("h3", { class: "title" }, "Virtual Lessor"),
-        h("div", [
-          ss({ shows: shows.value }),
-          h(
-            "form",
-            {
-              onsubmit: (Event) => Event.preventDefault(),
-            },
-            [
-              h(
-                <METextField
-                  label="Type the show name..."
-                  name="name"
-                  rules="required"
-                  autofocus
-                  standalone
-                  class="inputStyle"
-                />,
-                {
-                  onInput: (Event) => {
-                    inputValue.value = Event.target.value;
-                    console.log(inputValue.value);
-                  },
-                }
-              ),
-              h(
-                <MEButton alt compact label="search" />,
-                {
-                  onClick: async () => {
-                    textSearch(inputValue.value);
-                  },
-                },
-                ["Search"]
-              ),
-              h("div", [
-                error.value
-                  ? h("div", error.value)
-                  : shows.value?.map((showItem) =>
-                      h("div", { class: "show" }, [
-                        h("h3", { class: "text" }, showItem.show.name),
-                        h("img", {
-                          src: showItem.show.image?.medium,
-                          style: {
-                            boxShadow: "0 0 0.2em #ce62b4",
-                          },
-                        }),
-                      ])
-                    ),
-              ]),
-            ]
-          ),
-        ]),
-      ]);
-  },
- */
 </style>
