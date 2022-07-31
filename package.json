@@ -13,6 +13,7 @@
   "dependencies": {
     "bootstrap": "^5.2.0-beta1",
     "element-plus": "^2.2.9",
+    "unplugin-icons": "^0.14.8",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"
   },
@@ -31,8 +32,9 @@
     "jsdom": "^20.0.0",
     "prettier": "^2.5.1",
     "start-server-and-test": "^1.14.0",
+    "unplugin-vue-components": "^0.21.2",
     "vite": "^2.9.14",
-    "vitest": "^0.18.0",
-    "vite-svg-loader": "^3.4.0"
+    "vite-svg-loader": "^3.4.0",
+    "vitest": "^0.18.0"
   }
 }
