@@ -1,9 +1,9 @@
 <script lang="jsx">
 import { h, ref } from "vue";
-import { MEButton, METextField } from "@melhorenvio/ds-core";
+import { METextField } from "@melhorenvio/ds-core";
 
 export default {
-  setup(props) {
+  setup() {
     let inputValue = ref(null);
     return () =>
       h("div", { class: "divContainer" }, [
@@ -24,6 +24,7 @@ export default {
                 autofocus
                 standalone
               />,
+            
               {
                 placeholder: "V-model test...",
                 onInput: (Event) => {
@@ -41,7 +42,18 @@ export default {
                     },
                     [`v-model value: ${inputValue.value}`]
                   )
-                : h("span", ""),
+                : h("div", [
+                h("img", {
+                  src: "src/assets/v-model.svg",
+                  style: {
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    maxHeight: "70%",
+                    padding: "10px",
+                    marginTop: "15px",
+                  },
+                }),
+              ]),
             ]),
           ]
         ),

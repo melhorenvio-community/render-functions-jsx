@@ -2,7 +2,7 @@
 import { h, ref, onMounted } from "vue";
 
 export default {
-  setup(props) {
+  setup() {
     let categories = ref(null);
     let productsAll = ref(null);
     let error = ref(null);
