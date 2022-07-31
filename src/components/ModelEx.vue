@@ -6,7 +6,7 @@ export default {
   setup(props) {
     let inputValue = ref(null);
     return () =>
-      h("div", {class:"divContainer"}, [
+      h("div", { class: "divContainer" }, [
         h("h3", { class: "title" }, "v-model example"),
 
         h(
@@ -17,21 +17,20 @@ export default {
           },
           [
             h(
-            < METextField
-              label="Type the show name..."
-              name="name"
-              rules="required"
-              autofocus
-              standalone
-             
-            />, 
-            {
-              
-              placeholder: "V-model test...",
-              onInput: (Event) => {
-                inputValue.value = Event.target.value;
-              },
-            }),
+              <METextField
+                label="Type the show name..."
+                name="name"
+                rules="required"
+                autofocus
+                standalone
+              />,
+              {
+                placeholder: "V-model test...",
+                onInput: (Event) => {
+                  inputValue.value = Event.target.value;
+                },
+              }
+            ),
 
             h("div", { class: "forms" }, [
               inputValue.value
